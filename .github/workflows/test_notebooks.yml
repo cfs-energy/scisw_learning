@@ -1,0 +1,61 @@
+name: test_notebooks
+
+on: 
+  pull_request:
+    branches: [ "*" ]
+  push:
+    branches: [ "main", "develop", "release" ]
+  workflow_dispatch:
+    tag: "Manual Run"
+  workflow_call:
+  schedule:
+    - cron: "* */4 * * *"  # run every day at midnight EST (4am UTC)
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        python-version: ['3.10']
+
+    steps:
+
+    - uses: actions/checkout@v4
+
+    - name: Install Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+  
+    - name: Test Python
+      run: |
+        # Install with dev deps
+        cd python
+        uv venv
+        source .venv/bin/activate
+
+        uv pip install -r requirements.txt
+        uv pip install -e ./refproj[dev]
+        uv pip install papermill==2.6.0
+
+        python ../run_ipynb.py .
+
+        cd refproj
+        uv run pytest .
+        uv run mkdocs build
+
+    - name: Test Rust-Python
+      run: |
+        # Install with dev deps
+        cd rustpython
+        uv venv
+        source .venv/bin/activate
+
+        uv pip install -e ./refproj
+        uv pip install papermill==2.6.0
+
+        python ../run_ipynb.py .

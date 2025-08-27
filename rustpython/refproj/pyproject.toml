@@ -1,0 +1,25 @@
+[project]
+name = "refproj"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "James Logan", email = "jlogan@cfs.energy" }
+]
+requires-python = ">=3.9"
+dependencies = [
+    "cffi==1.17.1",  # for native builds
+]
+
+[tool.uv]
+cache-keys = [{file = "pyproject.toml"}, {file = "Cargo.toml"}, {file = "**/*.rs"}]
+
+[tool.maturin]
+module-name = "refproj.refproj"
+python-packages = ["refproj"]
+python-source = "src"
+features = ["python"]
+
+[build-system]
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
