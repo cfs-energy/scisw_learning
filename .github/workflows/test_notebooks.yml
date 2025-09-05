@@ -9,7 +9,7 @@ on:
     tag: "Manual Run"
   workflow_call:
   schedule:
-    - cron: "* */4 * * *"  # run every day at midnight EST (4am UTC)
+    - cron: "0 4 * * *"  # run every day at midnight EST (4am UTC)
 
 jobs:
   build:
@@ -36,7 +36,6 @@ jobs:
         # Install with dev deps
         cd python
         uv venv
-        source .venv/bin/activate
 
         uv pip install -r requirements.txt
         uv pip install -e ./refproj[dev]
@@ -52,8 +51,8 @@ jobs:
       run: |
         # Install with dev deps
         cd rustpython
+        uv cache clean
         uv venv
-        source .venv/bin/activate
 
         uv pip install -e ./refproj
         uv pip install papermill==2.6.0
