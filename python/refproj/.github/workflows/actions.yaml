@@ -32,6 +32,7 @@ jobs:
 
         # Lint and test
         uv run --locked pyright .
+        uv run --locked ruff format --check
         uv run --locked ruff check .
         uv run --locked pytest .
 

@@ -1,6 +1,6 @@
 [project]
 name = "refproj"
-version = "0.2.0"
+version = "0.2.1"
 description = "Add your description here"
 readme = "README.md"
 authors = [
@@ -52,6 +52,4 @@ select = [
     "B",
     # flake8-simplify
     "SIM",
-    # isort
-    "I",
 ]
