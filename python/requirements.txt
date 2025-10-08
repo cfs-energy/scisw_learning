@@ -6,20 +6,19 @@ pandas==2.2.3
 polars==1.27.1
 numpy>=2
 matplotlib==3.10.1
-scipy==1.15.2
+scipy==1.16.2
 pydantic[email]==2.11.3
 pydantic-numpy==8.0.1
 pyyaml==6.0.2
 toml==0.10.2
 snakeviz==2.2.2
+pyinstrument==5.1.1
 findiff==0.12.1
-# zarr>3 requires python3.11+
-zarr==2.18.3
-interpn==0.2.5
-cfsem==2.3.1
+interpn==0.2.6
+cfsem==2.5.0
 seaborn==0.13.2
 plotly==6.0.1
-kaleido==0.2.1
+kaleido==1.1.0
 aerosandbox==4.2.8
-CoolProp==6.8.0
-pint==0.24.4
+CoolProp==7.1.0
+pint==0.25.0
