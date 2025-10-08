@@ -37,8 +37,8 @@ jobs:
         cd python
         uv venv
 
-        uv pip install -r requirements.txt
         uv pip install -e ./refproj[dev]
+        uv pip install -r requirements.txt
         uv pip install papermill==2.6.0
 
         python ../run_ipynb.py .

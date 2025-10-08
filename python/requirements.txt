@@ -3,7 +3,7 @@
 # Intro class
 jupyter
 pandas==2.2.3
-polars==1.27.1
+polars==1.34.0
 numpy>=2
 matplotlib==3.10.1
 scipy==1.16.2
@@ -17,7 +17,7 @@ findiff==0.12.1
 interpn==0.2.6
 cfsem==2.5.0
 seaborn==0.13.2
-plotly==6.0.1
+plotly==6.3.1
 kaleido==1.1.0
 aerosandbox==4.2.8
 CoolProp==7.1.0
