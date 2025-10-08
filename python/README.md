@@ -28,7 +28,7 @@ happen under self-study or on-the-job outside class time.
 ### Install essentials
 * If you're on Windows, install WSL2
   * Anaconda-managed python environments are not recommended for this project
-* Python (3.10 or newer)
+* Python (3.11 or newer)
   * Preferably via `uv`, which allows managing multiple pythons
 * Pip, uv, git, vscode
 

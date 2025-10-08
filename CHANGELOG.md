@@ -5,6 +5,7 @@
 * Add zip archives to file I/O section
 * Add pyinstrument to performance section
 * Update cron schedule to run tests once per week instead of daily
+* Update python version to 3.11+
 
 ## 2025-09-05
 
