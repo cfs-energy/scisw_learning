@@ -1,5 +1,4 @@
-use numpy::PyArray1;
-use numpy::PyArrayMethods;
+use numpy::borrow::{PyReadonlyArray1, PyReadwriteArray1};
 use pyo3::exceptions;
 use pyo3::prelude::*;
 use std::fmt::Debug;
@@ -25,18 +24,18 @@ fn hello_from_bin() -> String {
 }
 
 #[pyfunction]
-fn nusselt_turbulent_smooth_duct<'py>(
-    re: Bound<'py, PyArray1<f64>>,
-    pr: Bound<'py, PyArray1<f64>>,
-    f: Bound<'py, PyArray1<f64>>,
-    out: Bound<'py, PyArray1<f64>>,
+fn nusselt_turbulent_smooth_duct(
+    re: PyReadonlyArray1<f64>,
+    pr: PyReadonlyArray1<f64>,
+    f: PyReadonlyArray1<f64>,
+    mut out: PyReadwriteArray1<f64>,
 ) -> PyResult<()> {
     // Calculate
     match rust::nusselt_turbulent_smooth_duct_par(
-        re.readonly().as_slice()?,
-        pr.readonly().as_slice()?,
-        f.readonly().as_slice()?,
-        out.readwrite().as_slice_mut()?,
+        re.as_slice()?,
+        pr.as_slice()?,
+        f.as_slice()?,
+        out.as_slice_mut()?,
     ) {
         Ok(_) => (),
         Err(x) => {
