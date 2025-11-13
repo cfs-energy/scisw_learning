@@ -40,6 +40,28 @@ pub fn nusselt_turbulent_smooth_duct(re: f64, pr: f64, f: f64) -> f64 {
 /// Gnielinski correlation for heat transfer in turbulent pipes.
 /// See [nusselt_turbulent_smooth_duct] for more info.
 #[inline]
+pub fn nusselt_turbulent_smooth_duct_vec(
+    re: &[f64],
+    pr: &[f64],
+    f: &[f64],
+    out: &mut [f64],
+) -> Result<(), &'static str> {
+    let m = out.len();
+    if re.len() != m || pr.len() != m || f.len() != m {
+        return Err("Length mismatch");
+    }
+
+    // Run scalar loop
+    for i in 0..m {
+        out[i] = nusselt_turbulent_smooth_duct(re[i], pr[i], f[i]);
+    }
+
+    Ok(())
+}
+
+/// Gnielinski correlation for heat transfer in turbulent pipes.
+/// See [nusselt_turbulent_smooth_duct] for more info.
+#[inline]
 pub fn nusselt_turbulent_smooth_duct_par(
     re: &[f64],
     pr: &[f64],
@@ -57,40 +79,20 @@ pub fn nusselt_turbulent_smooth_duct_par(
     // let n = re.len();  // uncomment to test singlethreaded
 
     // Chunk inputs, shadowing original names
-    let re = re.par_chunks(n);
-    let pr = pr.par_chunks(n);
-    let f = f.par_chunks(n);
-    let out = out.par_chunks_mut(n);
+    let rec = re.par_chunks(n);
+    let prc = pr.par_chunks(n);
+    let fc = f.par_chunks(n);
+    let outc = out.par_chunks_mut(n);
 
     // Iterate over each chunk in parallel, shadowing original names again
-    (out, re, pr, f)
+    (outc, rec, prc, fc)
         .into_par_iter()
         .try_for_each(|(out, re, pr, f)| {
-            // Check lengths
-            let m = out.len();
-            if re.len() != m || pr.len() != m || f.len() != m {
-                return Err("Length mismatch");
-            }
-
             // Run scalar loop
-            for i in 0..m {
-                out[i] = nusselt_turbulent_smooth_duct(re[i], pr[i], f[i]);
-            }
+            nusselt_turbulent_smooth_duct_vec(re, pr, f, out)?;
 
             Ok(())
         })?;
-
-    // Single-threaded variant
-    // // Check lengths
-    // let m = out.len();
-    // if re.len() != m || pr.len() != m || f.len() != m {
-    //     return Err("Length mismatch");
-    // }
-
-    // // Run scalar loop
-    // for i in 0..m {
-    //     out[i] = nusselt_turbulent_smooth_duct(re[i], pr[i], f[i]);
-    // }
 
     Ok(())
 }
