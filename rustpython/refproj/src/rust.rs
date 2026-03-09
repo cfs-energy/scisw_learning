@@ -32,7 +32,7 @@ pub(crate) fn chunksize(nelem: usize) -> usize {
 #[inline]
 pub fn nusselt_turbulent_smooth_duct(re: f64, pr: f64, f: f64) -> f64 {
     let num = (f / 8.0) * (re - 1000.0) * pr;
-    let denom = 1.0 + 12.7 * (f / 8.0).sqrt() * (pr.powf(2.0 / 3.0) - 1.0);
+    let denom = 1.0 + 12.7 * (f / 8.0).sqrt() * ((pr * pr).cbrt() - 1.0);
     let nu = num / denom;
     return nu; // [dimensionless] Nusselt number
 }

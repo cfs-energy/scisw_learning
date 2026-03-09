@@ -7,9 +7,7 @@ authors = [
     { name = "James Logan", email = "jlogan@cfs.energy" }
 ]
 requires-python = ">=3.9"
-dependencies = [
-    "cffi==1.17.1",  # for native builds
-]
+dependencies = []
 
 [tool.uv]
 cache-keys = [{file = "pyproject.toml"}, {file = "Cargo.toml"}, {file = "**/*.rs"}]
