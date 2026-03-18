@@ -15,4 +15,4 @@ if __name__ == "__main__":
     ]
 
     for notebook in notebooks:
-        pm.execute_notebook(notebook, "/dev/null")
+        pm.execute_notebook(notebook, "/dev/null", kernel_name="python")
