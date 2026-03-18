@@ -18,11 +18,11 @@ dependencies = [
 dev = [
     "pytest==9.0.2",
     "pytest-cov==7.0.0",
-    "ruff==0.15.5",
-    "ty==0.0.21",
+    "ruff==0.15.6",
+    "ty==0.0.23",
     "mktestdocs==0.2.5",
     "mkdocs>=1.6.1",
-    "mkdocs-material>=9.7.4",
+    "mkdocs-material>=9.7.5",
     "mkdocstrings[python]>=1.0.3",
 ]
 
