@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-03-18
+
+* Update actions and dependency versions for both reference projects
+* Use `ty` instead of `pyright` for type checking
+
 ## 2025-10-08
 
 * Add zip archives to file I/O section
