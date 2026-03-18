@@ -56,4 +56,6 @@ jobs:
         uv pip install -e ./refproj
         uv pip install papermill==2.6.0
 
+        uv run jupyter kernelspec list
+
         uv run python ../run_ipynb.py .
