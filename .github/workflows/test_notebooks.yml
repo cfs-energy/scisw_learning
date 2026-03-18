@@ -6,7 +6,6 @@ on:
   push:
     branches: [ "main", "develop", "release" ]
   workflow_dispatch:
-    tag: "Manual Run"
   workflow_call:
   schedule:
     - cron: "0 4 * * 1"  # run every week at midnight EST (4am UTC) on Monday
@@ -21,13 +20,13 @@ jobs:
 
     steps:
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - name: Install Rust toolchain
       uses: dtolnay/rust-toolchain@stable
 
     - name: Install uv
-      uses: astral-sh/setup-uv@v5
+      uses: astral-sh/setup-uv@v7
       with:
         python-version: ${{ matrix.python-version }}
   
@@ -37,24 +36,28 @@ jobs:
         cd python
         uv venv
 
-        uv pip install -e ./refproj[dev]
         uv pip install -r requirements.txt
         uv pip install papermill==2.6.0
+        uv run python ../run_ipynb.py .
 
-        python ../run_ipynb.py .
+        rm -rf .venv
 
         cd refproj
+        uv venv
+        uv pip install -e . --group dev
         uv run pytest .
         uv run mkdocs build
+
+        rm -rf .venv
 
     - name: Test Rust-Python
       run: |
         # Install with dev deps
-        cd rustpython
-        uv cache clean
+        cd rustpython/refproj
+
         uv venv
+        uv pip install -e .
+        uv pip install jupyter
+        uv pip install papermill==2.6.0 numpy
 
-        uv pip install -e ./refproj
-        uv pip install papermill==2.6.0
-
-        python ../run_ipynb.py .
+        uv run python ../../run_ipynb.py ../

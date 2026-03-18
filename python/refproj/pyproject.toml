@@ -1,6 +1,6 @@
 [project]
 name = "refproj"
-version = "0.2.1"
+version = "0.3.0"
 description = "Add your description here"
 readme = "README.md"
 authors = [
@@ -8,22 +8,22 @@ authors = [
 ]
 requires-python = ">=3.10,<3.14"
 dependencies = [
-    "click>=8.2.1",
-    "dash>=3.1.1",
-    "numpy>=2.2.6",
-    "rich>=14.0.0",
+    "click~=8.3.1",
+    "dash~=4.0.0",
+    "numpy>=1.21.2",
+    "rich~=14.3.3",
 ]
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
-    "pytest==8.4.1",
-    "pytest-cov==6.2.1",
-    "ruff==0.12.2",
-    "pyright==1.1.402",
-    "mktestdocs==0.2.4",
-    "mkdocs>=1.6.0",
-    "mkdocs-material>=9.6.12",
-    "mkdocstrings[python]>=0.29.1",
+    "pytest==9.0.2",
+    "pytest-cov==7.0.0",
+    "ruff==0.15.6",
+    "ty==0.0.23",
+    "mktestdocs==0.2.5",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.7.5",
+    "mkdocstrings[python]>=1.0.3",
 ]
 
 [build-system]

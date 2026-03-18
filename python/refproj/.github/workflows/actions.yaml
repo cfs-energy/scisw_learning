@@ -7,7 +7,6 @@ on:
   pull_request:
     branches: [ "*" ]
   workflow_dispatch:
-    tag: "Manual Run"
 
 jobs:
   test:
@@ -31,9 +30,9 @@ jobs:
         uv pip install .[dev]
 
         # Lint and test
-        uv run --locked pyright .
-        uv run --locked ruff format --check
-        uv run --locked ruff check .
+        uv run --locked ty check ./src
+        uv run --locked ruff format --check ./src
+        uv run --locked ruff check ./src
         uv run --locked pytest .
 
         # Build docs to make sure they work
