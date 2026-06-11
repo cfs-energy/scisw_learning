@@ -4,7 +4,7 @@ use pyo3::prelude::*;
 use std::collections::HashMap;
 use std::fmt::Debug;
 
-use crate::rust;
+use crate::{cat, rust};
 
 /// Errors from mismatch between python and rust
 #[derive(Debug)]
@@ -83,9 +83,9 @@ fn jumble(
 /// import the module.
 #[pymodule]
 fn refproj(m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_class::<rust::Cat>()?;
+    m.add_class::<cat::Cat>()?;
     m.add_function(wrap_pyfunction!(hello_from_bin, m)?)?;
-    m.add_function(wrap_pyfunction!(rust::pet, m)?)?;
+    m.add_function(wrap_pyfunction!(cat::pet, m)?)?;
     m.add_function(wrap_pyfunction!(nusselt_turbulent_smooth_duct, m)?)?;
     m.add_function(wrap_pyfunction!(jumble, m)?)?;
     Ok(())
