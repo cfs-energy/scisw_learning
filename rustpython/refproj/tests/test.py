@@ -1,6 +1,6 @@
 from math import isclose
 
-from refproj import jumble
+from refproj import Cat, jumble, pet
 
 
 def test_jumble_smoke() -> None:
@@ -11,3 +11,11 @@ def test_jumble_smoke() -> None:
     for actual, expected in zip(numbers, [1.1, 2.2, 3.3]):
         assert isclose(actual, expected)
     assert config_maybe == {"eggs": None}
+
+
+def test_cat_json_and_pet() -> None:
+    cat = Cat("Mochi")
+
+    assert cat.to_json() == '{"name":"Mochi"}'
+    assert Cat.from_json(cat.to_json()).name == "Mochi"
+    assert pet(cat) == "You pet Mochi."
