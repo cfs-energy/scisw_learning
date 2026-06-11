@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-06-11
+
+* Add `jumble` function example with simple numpy-less python interface
+
 ## 2026-03-18
 
 * Update actions and dependency versions for both reference projects

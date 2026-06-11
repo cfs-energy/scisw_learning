@@ -1,4 +1,4 @@
-from refproj.refproj import hello_from_bin, nusselt_turbulent_smooth_duct
+from refproj.refproj import hello_from_bin, jumble, nusselt_turbulent_smooth_duct
 
 def hello() -> str:
     return hello_from_bin()
@@ -6,5 +6,6 @@ def hello() -> str:
 
 __all__ = [
     "hello_from_bin",
+    "jumble",
     "nusselt_turbulent_smooth_duct"
 ]
