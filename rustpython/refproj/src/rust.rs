@@ -8,7 +8,6 @@ use rayon::{
     iter::{IntoParallelIterator, ParallelIterator},
     slice::{ParallelSlice, ParallelSliceMut},
 };
-
 /// Chunk size for parallelism
 #[inline]
 pub(crate) fn chunksize(nelem: usize) -> usize {
